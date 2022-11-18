@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Navbar from "./Components/Common/Navbar";
+import Home from "./Components/Home";
+import axios from "axios";
+
+export default function App() {
+    const options = {
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/cats',
+        params: { name: 'abyssinian' },
+        headers: { 'X-Api-Key': '8I5WKinqRnySQO3moxyqbw==zy4om9QVXoSingY4' }
+    };
+
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+    }).catch(function (error) {
+        console.error(error);
+    });
+
+    return (
+        <div>
+            <Navbar />
+            <Router>
+                <div>
+                    <Switch>
+                        <Route path="/about">
+                            <About />
+                        </Route>
+                        <Route path="/contact">
+                            <Contact />
+                        </Route>
+                        <Route path="/">
+                            <Home />
+                        </Route>
+                    </Switch>
+
+                </div>
+            </Router>
+        </div>
+
+    );
 }
 
-export default App;
+
+function About() {
+    return <h2>About</h2>;
+}
+
+function Contact() {
+    return <h2>Contact</h2>;
+}
