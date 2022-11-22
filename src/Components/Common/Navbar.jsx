@@ -8,7 +8,7 @@ function MyNavbar() {
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="#">Car Rentals</Navbar.Brand>
+                <Navbar.Brand href="#">Adopt Kitties</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

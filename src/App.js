@@ -6,7 +6,9 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./Components/Common/Navbar";
-import Home from "./Components/Home";
+// import Home from "./Components/Home";
+import Cats from "./Components/Cats";
+
 import axios from "axios";
 
 export default function App() {
@@ -36,7 +38,7 @@ export default function App() {
                             <Contact />
                         </Route>
                         <Route path="/">
-                            <Home />
+                            <Cats />
                         </Route>
                     </Switch>
 
