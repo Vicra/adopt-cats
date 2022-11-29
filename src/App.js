@@ -6,25 +6,11 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./Components/Common/Navbar";
-// import Home from "./Components/Home";
-import Cats from "./Components/Cats";
+import Home from "./Components/Home";
+// import Cats from "./Components/Cats";
+import MyLogin from "./Components/MyLogin/MyLogin";
 
-import axios from "axios";
-
-export default function App() {
-    const options = {
-        method: 'GET',
-        url: 'https://api.api-ninjas.com/v1/cats',
-        params: { name: 'abyssinian' },
-        headers: { 'X-Api-Key': '8I5WKinqRnySQO3moxyqbw==zy4om9QVXoSingY4' }
-    };
-
-    axios.request(options).then(function (response) {
-        console.log(response.data);
-    }).catch(function (error) {
-        console.error(error);
-    });
-
+export default function App(props) {
     return (
         <div>
             <Navbar />
@@ -37,8 +23,11 @@ export default function App() {
                         <Route path="/contact">
                             <Contact />
                         </Route>
+                        <Route path="/login">
+                            <MyLogin/>
+                        </Route>
                         <Route path="/">
-                            <Cats />
+                            <Home />
                         </Route>
                     </Switch>
 

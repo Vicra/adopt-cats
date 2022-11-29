@@ -26,15 +26,22 @@ function Cats(props) {
   });
 
   return (
-    <Container>
-      <Row>
-        {cats.map((cat) => (
-          <Col lg>
-            <Card {...cat}/>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div>
+      <Container>
+        <h2>Our Kitties</h2>
+        <Container>
+          <Row>
+            {cats.map((cat) => (
+              <Col lg>
+                <Card {...cat}/>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </Container>
+      
+    </div>
+    
     // bstrap grid
     // bstrap Cards
   );
