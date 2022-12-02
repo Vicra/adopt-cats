@@ -41,9 +41,6 @@ function Cats(props) {
       </Container>
       
     </div>
-    
-    // bstrap grid
-    // bstrap Cards
   );
 }
 

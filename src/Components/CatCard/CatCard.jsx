@@ -9,8 +9,10 @@ function CatCard(props) {
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>
-          <strong>Breed:</strong>{props.name}<br/>
-          <strong>Life Expentancy:</strong>:{props.max_life_expectancy} 
+          <strong>Breed:</strong> {props.name}<br/>
+          <strong>Life Expentancy:</strong> {props.max_life_expectancy}<br/>
+          <strong>Origin:</strong> {props.origin}<br/>
+          <strong>Size:</strong> {props.length}<br/>
         </Card.Text>
         <Button variant="primary">Adopt me</Button>
       </Card.Body>

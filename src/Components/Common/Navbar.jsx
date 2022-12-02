@@ -1,10 +1,25 @@
+// import { useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
+import { useDispatch } from 'react-redux'
+import { setQuery } from "../../features/query/querySlice"
+
 function MyNavbar() {
+    const dispatch = useDispatch();
+    const [searchField, setsearchField] = useState("")
+
+    const handleSubmit = () => {
+      dispatch(setQuery(searchField))
+    }
+
+    // function handleSubmit2() {
+
+    // }
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
@@ -21,14 +36,22 @@ function MyNavbar() {
                         <Nav.Link href="/contact">Contact</Nav.Link>
                         <Nav.Link href="/login">Login</Nav.Link>
                     </Nav>
-                    <Form className="d-flex">
+                    <Form className="d-flex" 
+                      // onClick={search}
+                      >
                         <Form.Control
                             type="search"
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"
+                            // onChange={(e) => dispatch(setQuery(e.target.value)) }
+                            onChange={(e) => setsearchField(e.target.value)}
                         />
-                        <Button variant="outline-success">Search</Button>
+                        <Button variant="outline-success"
+                          onClick={handleSubmit}
+                          >
+                            Search
+                          </Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>

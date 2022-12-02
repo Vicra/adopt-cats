@@ -1,14 +1,19 @@
-import axios from "axios";
+// import axios from "axios";
 
-export async function getCats() {
-  const options = {
-    method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/cats',
-    params: {name: 'abyssinian'},
-    headers: {'X-Api-Key': '8I5WKinqRnySQO3moxyqbw==zy4om9QVXoSingY4'}
-  };
+export function getCats() {
+  // const options = {
+  //   method: 'GET',
+  //   url: 'https://api.api-ninjas.com/v1/cats',
+  //   params: {name: 'abyssinian'},
+  //   headers: {'X-Api-Key': '8I5WKinqRnySQO3moxyqbw==zy4om9QVXoSingY4'}
+  // };
   
-  const response = await axios.request(options);
+  // const response = await axios.request(options);
+
+  const response = {
+    data: []
+  };
+
   response.data.push({
     "length": "14 to 18 inches, not including tail",
     "origin": "Persia (known as Iran today)",

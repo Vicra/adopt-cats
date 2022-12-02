@@ -34,6 +34,7 @@ function Login() {
       
       // store accesstoken
       setTokens({accessToken, refreshToken})
+      console.log(tokens);
 
       // redirect to /home
       
