@@ -17,13 +17,10 @@ function MyNavbar() {
       dispatch(setQuery(searchField))
     }
 
-    // function handleSubmit2() {
-
-    // }
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="#">Adopt Kitties</Navbar.Brand>
+                <Navbar.Brand href="#">AdoptaHn</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

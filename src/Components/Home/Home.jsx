@@ -35,20 +35,23 @@ function Home() {
       } 
       setDisplayedCats(newArr)
     }
-  }, [query]);
+  }, [cats, query]);
   
-
   return (
-      <Container>
-        <h2>Our Cats</h2>
-        <Row>
-          {displayedCats.map((cat) => (
-            <Col lg>
-              <CatCard {...cat}/>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      <div>
+         <div id="background"> </div>
+        <Container>
+          <h2>Nuestas Mascotas</h2>
+          <Row>
+            {displayedCats.map((cat) => (
+              <Col xs>
+                <CatCard {...cat}/>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </div>
+      
   );
 }
 

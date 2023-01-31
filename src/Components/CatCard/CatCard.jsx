@@ -2,10 +2,18 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import "./CatCard.css"
+
 function CatCard(props) {
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={props.image_link}/>
+      {/* <div> */}
+        <Card.Img variant="top" src={props.image_link} 
+        style={{
+          maxHeight:"200px"
+          , position:"center"
+          , width:"auto"}}/>
+      {/* </div> */}
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>
