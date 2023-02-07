@@ -2,10 +2,17 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { Container } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+    loadCaptchaEnginge,
+    LoadCanvasTemplateNoReload,
+    validateCaptcha,
+} from "react-simple-captcha";
 import forIn from "lodash/forIn";
 
 import { register } from "../../services/users";
+
+const CAPTCHA_CHARACTER_COUNT = 6;
 
 function Register() {
     const [errors, setErrors] = useState({});
@@ -18,32 +25,31 @@ function Register() {
         });
     };
 
-    const characters = "abc123";
-    function generateString(length) {
-        let result = "";
-        const charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(
-                Math.floor(Math.random() * charactersLength)
-            );
-        }
-        return result;
-    }
-    const captcha = generateString(6);
+    useEffect(() => {
+        loadCaptchaEnginge(CAPTCHA_CHARACTER_COUNT);
+    }, errors);
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        //validate
-        const newErrors = findFormErrors();
-        console.log("newErrors", Object.keys(newErrors));
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
+        let user_captcha_value =
+            document.getElementById("user_captcha_input").value;
+        if (validateCaptcha(user_captcha_value) === true) {
+            const newErrors = findFormErrors();
+            if (Object.keys(newErrors).length > 0) {
+                setErrors(newErrors);
+            } else {
+                const response = await register(form);
+                if (!response.success) {
+                    setErrors({
+                        general: response.details,
+                    });
+                } else {
+                    setErrors({});
+                }
+            }
         } else {
-            console.log("OK");
-            // call to api
-            const response = await register(form.email, form.password);
-            console.log(response);
+            alert("Captcha Does not Match");
         }
     }
 
@@ -56,6 +62,8 @@ function Register() {
             dni: form.dni ? form.dni.trim() : "",
             address: form.address ? form.address.trim() : "",
             role: form.role ? form.role : "",
+            state: form.state ? form.state : "",
+            zipcode: form.zipcode ? form.zipcode.trim() : "",
         });
     }
 
@@ -87,19 +95,22 @@ function Register() {
         };
         forIn(requiredBody, function (value, key) {
             if (!form[key]) {
-                // newErrors[key] = `El campo'${key}' es requerido`;
                 newErrors[key] = `Este campo es requerido`;
             } else {
                 form[key] = value ? value.trim() : "";
             }
         });
+
+        if (confirmPassword !== password) {
+            newErrors.confirmPassword = `Las contraseñas no coinciden.`;
+        }
         return newErrors;
     }
 
     return (
-        <Container>
+        <Container className="container-form">
             <Form onSubmit={handleSubmit}>
-                <h1>Registrarse</h1>
+                <h1>Nueva Cuenta</h1>
                 <FloatingLabel
                     controlId="floatingInput"
                     label="Correo Electrónico"
@@ -273,9 +284,24 @@ function Register() {
                     </Form.Control.Feedback>
                 </FloatingLabel>
 
-                <Button variant="primary" type="submit">
-                    Registrarse
-                </Button>
+                <LoadCanvasTemplateNoReload />
+                <Form.Control
+                    type="text"
+                    placeholder="Ingresa el valor del captcha"
+                    id="user_captcha_input"
+                    name="user_captcha_input"
+                    className="mb-3"
+                />
+
+                <div className="button-submit">
+                    <Button variant="primary" type="submit">
+                        Registrarse
+                    </Button>
+                </div>
+
+                <Form.Control.Feedback type="invalid">
+                    {errors.general}
+                </Form.Control.Feedback>
             </Form>
         </Container>
     );

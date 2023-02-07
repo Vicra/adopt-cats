@@ -59,6 +59,9 @@ function Login() {
         const passwordPattern = new RegExp(
             /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
         );
+        if (!passwordPattern.test(password)) {
+            newErrors.password = "Please enter valid password.";
+        }
         return newErrors;
     }
 

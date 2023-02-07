@@ -9,15 +9,23 @@ const knex = require("knex")({
     },
 });
 
-function registerUser(newUser) {
-    return knex("users").insert({
-        ...newUser,
+async function registerUser(newUser) {
+    return await knex("users").insert({
+        email: newUser.email,
+        name: newUser.name,
+        password: newUser.password,
+        salt: newUser.salt,
+        role: newUser.role,
+        address: newUser.address,
+        state: newUser.state,
+        zipcode: newUser.zipcode,
+        dni: newUser.dni,
     });
 }
 
 async function getUserByEmail(email) {
     return await knex
-        .select("name", "email", "password", "salt")
+        .select("name", "email", "password", "salt", "approved", "verified")
         .table("users")
         .where("email", email);
 }

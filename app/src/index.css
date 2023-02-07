@@ -20,6 +20,10 @@ h1 {
     button {
         width: 100%;
     }
+    .container-form {
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
 }
 
 @media (min-width: 1025px) {
@@ -30,5 +34,9 @@ h1 {
     .button-submit {
         display: grid;
         place-content: center;
+    }
+    .container-form {
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
 }
