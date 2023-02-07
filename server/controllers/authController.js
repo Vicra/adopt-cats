@@ -2,13 +2,12 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 
-const { registerUser } = require("../services/auth");
+const { registerUser, getUserByEmail } = require("../services/auth");
 const {
     successResponse,
     badRequestResponse,
 } = require("../utils/responseBuilder");
 const { IsEmail, IsPassword } = require("../utils/validator");
-const { isDecimal } = require("../utils/validator");
 const HTTPCodes = require("../utils/HttpCodes");
 
 async function login(req, res) {
@@ -16,22 +15,27 @@ async function login(req, res) {
         const { email, password } = req.body;
         const errorMessages = [];
 
-        if (!email) {
-            errorMessages.push("Parameter 'email' is required");
-        } else if (!IsEmail(email)) {
-            errorMessages.push("Parameter 'email' invalid");
-        }
+        const requiredBody = {
+            email,
+            password,
+        };
+        _.forIn(requiredBody, function (value, key) {
+            if (!req.body[key]) {
+                errorMessages.push(`Parameter '${key}' is required`);
+            } else {
+                req.body[key] = value ? value.trim() : "";
+            }
+        });
 
-        if (!password) {
-            errorMessages.push("Parameter 'password' is required");
-        } else if (!IsPassword(password)) {
+        if (!IsEmail(email)) errorMessages.push("Parameter 'email' invalid");
+        if (!IsPassword(password))
             errorMessages.push("Parameter 'password' invalid");
-        }
 
-        let dbUser = await getStudentByEmail(email);
+        let dbUser = await getUserByEmail(email);
         if (dbUser) {
             dbUser = dbUser[0];
             const userEncryptedDetails = encryptPassword(password, dbUser.salt);
+
             if (userEncryptedDetails.encryptedPassword === dbUser.password) {
                 const accessToken = jwt.sign(
                     {
@@ -44,7 +48,6 @@ async function login(req, res) {
                     }
                 );
 
-                // TODO: do we need email?
                 const refreshToken = jwt.sign(
                     {
                         email: dbUser.email,
@@ -65,7 +68,6 @@ async function login(req, res) {
         } else {
             res.status(404).send("Email does not exist");
         }
-        console.log(dbUser);
     } catch (e) {}
 }
 
