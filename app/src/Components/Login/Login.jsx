@@ -64,35 +64,32 @@ function Login() {
 
     return (
         <Container>
-            <h2>Iniciar Sesión</h2>
+            <h1>Iniciar Sesión</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Correo</Form.Label>
+                    <Form.Label>Correo Electrónico</Form.Label>
                     <Form.Control
                         type="email"
-                        placeholder="Enter email"
+                        placeholder="correo@mail.com"
                         onChange={(e) => setField("email", e.target.value)}
                         isInvalid={!!errors.email}
                     />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                     <Form.Control.Feedback type="invalid">
                         {errors.email}
                     </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Contraseña</Form.Label>
                     <Form.Control
                         type="password"
-                        placeholder="Password"
+                        placeholder="Contraseña"
                         onChange={(e) => setField("password", e.target.value)}
                         isInvalid={!!errors.password}
                     />
                     <Form.Text className="text-muted">
-                        Your password must have at least one uppercase letter,
-                        one number, and one special character
+                        Tu contraseña debe tener un caracter mayusculo, un
+                        número y un caracter especial.
                     </Form.Text>
                     <Form.Control.Feedback type="invalid">
                         {errors.password}
@@ -101,9 +98,11 @@ function Login() {
                 <Form.Control.Feedback type="invalid">
                     {errors.name}
                 </Form.Control.Feedback>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                <div className="button-submit">
+                    <Button variant="primary" type="submit">
+                        Iniciar
+                    </Button>
+                </div>
             </Form>
         </Container>
     );
