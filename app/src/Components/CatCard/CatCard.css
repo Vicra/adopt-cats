@@ -1,0 +1,8 @@
+card-img-top:hover {
+  transform: scale(2, 2);
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+}

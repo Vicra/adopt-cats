@@ -1,0 +1,42 @@
+#background {
+  background: url("/public/sps.jpeg");
+  background-position: center;
+  background-size: cover;
+  height: 225px;
+  width: 100%;
+}
+
+.center-text {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  -webkit-text-stroke: 1px dimgray;
+  font-size: 4em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+@media (max-width: 480px) {
+  #background {
+    height: 200px;
+  }
+  .center-text {
+    top: 15%;
+    font-size: 2em;
+    -webkit-text-stroke: 1px white;
+  }
+}
+
+@media (min-width: 481px) {
+  #background {
+    height: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  #background {
+    height: 450px;
+  }
+}
