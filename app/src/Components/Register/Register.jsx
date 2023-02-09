@@ -253,8 +253,12 @@ function Register() {
                     className="mb-3"
                 />
 
-                <div className="button-submit">
-                    <Button variant="primary" type="submit">
+                <div className="button-submit-container">
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        className="button-submit"
+                    >
                         Registrarse
                     </Button>
                 </div>

@@ -43,7 +43,7 @@ function Login() {
     }
 
     return (
-        <Container>
+        <Container className="container-form">
             <h1>Iniciar Sesión</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -76,8 +76,12 @@ function Login() {
                     </Form.Control.Feedback>
                 </Form.Group>
 
-                <div className="button-submit">
-                    <Button variant="primary" type="submit">
+                <div className="button-submit-container">
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        className="button-submit"
+                    >
                         Iniciar
                     </Button>
                 </div>
