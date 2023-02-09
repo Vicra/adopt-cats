@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import { login } from "../../services/users";
 import { useHistory } from "react-router-dom";
 
+import findFormErrors from "./formValidation";
+
 function Login() {
     const [errors, setErrors] = useState({});
     const [form, setForm] = useState({});
@@ -21,48 +23,23 @@ function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const newErrors = findFormErrors();
+        const newErrors = findFormErrors(form);
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
         } else {
-            const { accessToken, refreshToken } = await login(
-                form.email,
-                form.password
-            );
-            setTokens({ accessToken, refreshToken });
-            console.log(tokens);
-            history.push("/home");
+            const response = await login(form.email, form.password);
+            console.log(response);
+            if (response.success) {
+                const { accessToken, refreshToken } = response.data;
+                console.log(response.data);
+                setTokens({ accessToken, refreshToken });
+                history.push("/home");
+            } else {
+                setErrors({
+                    email: response.details,
+                });
+            }
         }
-    }
-
-    function findFormErrors() {
-        const newErrors = {};
-        const { email, password } = form;
-
-        if (!email && email !== "") {
-            newErrors.email = "Email cannot be empty";
-        }
-        // validate with regex
-        if (!password && password !== "") {
-            newErrors.password = "Password cannot be empty";
-        }
-        // validate with regex
-        const pattern = new RegExp(
-            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-        );
-        if (!pattern.test(email)) {
-            newErrors.email = "Please enter valid email address.";
-        }
-
-        if (!password || password === "")
-            newErrors.password = "Please cannot be empty";
-        const passwordPattern = new RegExp(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-        );
-        if (!passwordPattern.test(password)) {
-            newErrors.password = "Please enter valid password.";
-        }
-        return newErrors;
     }
 
     return (
@@ -98,9 +75,7 @@ function Login() {
                         {errors.password}
                     </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Control.Feedback type="invalid">
-                    {errors.name}
-                </Form.Control.Feedback>
+
                 <div className="button-submit">
                     <Button variant="primary" type="submit">
                         Iniciar

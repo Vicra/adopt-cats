@@ -35,9 +35,9 @@ async function login(req, res) {
         if (dbUser) {
             dbUser = dbUser[0];
             if (!dbUser.verified) {
-                res.status(HTTPCodes.BAD_REQUEST).send(
+                res.send(
                     badRequestResponse(
-                        "Account is not verified, check your email",
+                        "La cuenta no esta verificada, revisa tu correo o contacta a servicio al cliente.",
                         HTTPCodes.BAD_REQUEST
                     )
                 );
@@ -68,10 +68,12 @@ async function login(req, res) {
                     }
                 );
 
-                res.send({
-                    accessToken,
-                    refreshToken,
-                });
+                res.send(
+                    successResponse({
+                        accessToken,
+                        refreshToken,
+                    })
+                );
             } else {
                 res.status(HTTPCodes.UNAUTHORIZED).send(
                     badRequestResponse("Unauthorized", HTTPCodes.UNAUTHORIZED)

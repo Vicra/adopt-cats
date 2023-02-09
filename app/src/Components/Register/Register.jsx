@@ -8,9 +8,9 @@ import {
     LoadCanvasTemplateNoReload,
     validateCaptcha,
 } from "react-simple-captcha";
-import forIn from "lodash/forIn";
 
 import { register } from "../../services/users";
+import findFormErrors from "./formValidation";
 
 const CAPTCHA_CHARACTER_COUNT = 6;
 
@@ -24,34 +24,6 @@ function Register() {
             [field]: value,
         });
     };
-
-    useEffect(() => {
-        loadCaptchaEnginge(CAPTCHA_CHARACTER_COUNT);
-    }, errors);
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        let user_captcha_value =
-            document.getElementById("user_captcha_input").value;
-        if (validateCaptcha(user_captcha_value) === true) {
-            const newErrors = findFormErrors();
-            if (Object.keys(newErrors).length > 0) {
-                setErrors(newErrors);
-            } else {
-                const response = await register(form);
-                if (!response.success) {
-                    setErrors({
-                        general: response.details,
-                    });
-                } else {
-                    setErrors({});
-                }
-            }
-        } else {
-            alert("Captcha Does not Match");
-        }
-    }
 
     function cleanUp(form) {
         return setForm({
@@ -67,44 +39,32 @@ function Register() {
         });
     }
 
-    function findFormErrors() {
-        const newErrors = {};
-        cleanUp(form);
-        const {
-            email,
-            password,
-            confirmPassword,
-            name,
-            dni,
-            address,
-            role,
-            zipcode,
-            state,
-        } = form;
+    useEffect(() => {
+        loadCaptchaEnginge(CAPTCHA_CHARACTER_COUNT);
+    }, errors);
 
-        const requiredBody = {
-            email,
-            password,
-            confirmPassword,
-            name,
-            role,
-            dni,
-            address,
-            zipcode,
-            state,
-        };
-        forIn(requiredBody, function (value, key) {
-            if (!form[key]) {
-                newErrors[key] = `Este campo es requerido`;
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        let user_captcha_value =
+            document.getElementById("user_captcha_input").value;
+        if (validateCaptcha(user_captcha_value) === true) {
+            const newErrors = findFormErrors(form, cleanUp);
+            if (Object.keys(newErrors).length > 0) {
+                setErrors(newErrors);
             } else {
-                form[key] = value ? value.trim() : "";
+                const response = await register(form);
+                if (!response.success) {
+                    setErrors({
+                        general: response.details,
+                    });
+                } else {
+                    setErrors({});
+                }
             }
-        });
-
-        if (confirmPassword !== password) {
-            newErrors.confirmPassword = `Las contraseñas no coinciden.`;
+        } else {
+            alert("Captcha Does not Match");
         }
-        return newErrors;
     }
 
     return (
