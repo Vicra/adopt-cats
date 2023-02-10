@@ -41,7 +41,7 @@ function Register() {
 
     useEffect(() => {
         loadCaptchaEnginge(CAPTCHA_CHARACTER_COUNT);
-    }, errors);
+    }, [errors]);
 
     async function handleSubmit(e) {
         e.preventDefault();

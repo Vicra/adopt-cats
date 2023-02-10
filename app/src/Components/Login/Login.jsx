@@ -1,16 +1,22 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import useLocalStorageState from "use-local-storage-state";
+
 import React, { useState } from "react";
-import { login } from "../../services/users";
 import { useHistory } from "react-router-dom";
 
+import { login } from "../../services/users";
 import findFormErrors from "./formValidation";
 
 function Login() {
     const [errors, setErrors] = useState({});
     const [form, setForm] = useState({});
-    const [tokens, setTokens] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = useLocalStorageState(
+        "isLoggedIn",
+        false
+    );
+    const [tokens, setTokens] = useLocalStorageState("tokens", {});
 
     const history = useHistory();
 
@@ -30,10 +36,14 @@ function Login() {
             const response = await login(form.email, form.password);
             console.log(response);
             if (response.success) {
+                setIsLoggedIn(!isLoggedIn);
                 const { accessToken, refreshToken } = response.data;
-                console.log(response.data);
                 setTokens({ accessToken, refreshToken });
-                history.push("/home");
+                console.log(tokens);
+
+                // TODO: optimize these next 2 lines in one
+                history.push("/");
+                history.go("/");
             } else {
                 setErrors({
                     email: response.details,

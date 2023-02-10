@@ -7,11 +7,11 @@ import Home from "./Components/Home";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 
-export default function App(props) {
+export default function App() {
     return (
         <div>
-            <Navbar />
             <Router>
+                <Navbar />
                 <div>
                     <Switch>
                         <Route path="/about">
@@ -31,8 +31,8 @@ export default function App(props) {
                         </Route>
                     </Switch>
                 </div>
+                <Footer />
             </Router>
-            <Footer />
         </div>
     );
 }

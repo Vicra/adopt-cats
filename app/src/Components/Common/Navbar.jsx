@@ -1,9 +1,21 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useHistory } from "react-router-dom";
 
 function MyNavbar() {
+    const history = useHistory();
+    const isLoggedIn = window.localStorage.getItem("isLoggedIn");
+
+    async function logout() {
+        console.log("excecuting logout...");
+        window.localStorage.clear();
+        history.push("/login");
+        history.go("/login");
+    }
+
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -18,17 +30,24 @@ function MyNavbar() {
                         <Nav.Link href="/">Inicio</Nav.Link>
                         <Nav.Link href="/about">Acerca de Nosotros</Nav.Link>
                         <Nav.Link href="/contact">Contacto</Nav.Link>
-                        <NavDropdown
-                            title="Cuenta"
-                            id="navbarScrollingDropdown"
-                        >
-                            <NavDropdown.Item href="/login">
-                                Inicia Sesión
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="/register">
-                                Registrarse
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        {!isLoggedIn && (
+                            <NavDropdown
+                                title="Cuenta"
+                                id="navbarScrollingDropdown"
+                            >
+                                <NavDropdown.Item href="/login">
+                                    Inicia Sesión
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/register">
+                                    Registrarse
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        )}
+                        {isLoggedIn && (
+                            <Button onClick={logout} className="btn-danger">
+                                Logout
+                            </Button>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
