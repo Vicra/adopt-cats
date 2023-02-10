@@ -9,7 +9,7 @@ import {
     validateCaptcha,
 } from "react-simple-captcha";
 
-import { register } from "../../services/users";
+import { register } from "../../../services/users";
 import findFormErrors from "./formValidation";
 
 const CAPTCHA_CHARACTER_COUNT = 6;

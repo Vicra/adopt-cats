@@ -3,9 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "./Components/Common/Navbar";
 import Footer from "./Components/Common/Footer";
+
 import Home from "./Components/Home";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
+
+import Register from "./Components/Pages/Register";
+import Login from "./Components/Pages/Login";
+import PetDetails from "./Components/Pages/PetDetails";
+import About from "./Components/Pages/About";
+import Contact from "./Components/Pages/Contact";
 
 export default function App() {
     return (
@@ -26,6 +31,9 @@ export default function App() {
                         <Route path="/register">
                             <Register />
                         </Route>
+                        <Route path="/pet-details">
+                            <PetDetails />
+                        </Route>
                         <Route path="/">
                             <Home />
                         </Route>
@@ -35,12 +43,4 @@ export default function App() {
             </Router>
         </div>
     );
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
-function Contact() {
-    return <h2>Contact</h2>;
 }
