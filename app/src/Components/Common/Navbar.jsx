@@ -27,8 +27,7 @@ function MyNavbar() {
                         style={{ maxHeight: "250px" }}
                         navbarScroll
                     >
-                        <Nav.Link href="/">Inicio</Nav.Link>
-                        <Nav.Link href="/about">Acerca de Nosotros</Nav.Link>
+                        <Nav.Link href="/give-in">Dar en Adopción</Nav.Link>
                         <Nav.Link href="/contact">Contacto</Nav.Link>
                         {!isLoggedIn && (
                             <NavDropdown
