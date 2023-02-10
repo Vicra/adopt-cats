@@ -19,9 +19,13 @@ h2 {
 
 .img-container {
     display: flex;
-    max-width: 250px;
     justify-content: center;
+    margin-right: none;
 }
+.img-pet-card {
+    max-width: 250px;
+}
+
 img {
     max-width: 100%;
     max-height: 100%;
