@@ -1,12 +1,11 @@
 import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Container from "react-bootstrap/Container";
 import UploadAndDisplayImage from "./UploadAndDisplayImage";
 
 import { useState } from "react";
 
 const GiveInAdoption = (props) => {
-    const [errors, setErrors] = useState({});
+    const [errors] = useState({});
     const [form, setForm] = useState({});
 
     const setField = (field, value) => {
@@ -25,7 +24,7 @@ const GiveInAdoption = (props) => {
                     <Form.Label>Nombre de la mascota</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Toby"
+                        placeholder="Nombre"
                         onChange={(e) => setField("name", e.target.value)}
                         isInvalid={!!errors.name}
                     />
@@ -104,6 +103,23 @@ const GiveInAdoption = (props) => {
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                         {errors.size}
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="birthDate">
+                    <Form.Label>Fecha de Nacimiento</Form.Label>
+                    <Form.Control
+                        type="date"
+                        placeholder=""
+                        onChange={(e) => setField("birthDate", e.target.value)}
+                        isInvalid={!!errors.birthDate}
+                    />
+                    <Form.Text className="text-muted">
+                        En caso de no saber la fecha de nacimiento coloca el año
+                        aproximado y 1 de Enero
+                    </Form.Text>
+                    <Form.Control.Feedback type="invalid">
+                        {errors.birthDate}
                     </Form.Control.Feedback>
                 </Form.Group>
 

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 function FileUploadMultiple() {
     const [fileList, setFileList] = useState(null);
@@ -43,7 +43,7 @@ function FileUploadMultiple() {
                 ))}
             </ul>
 
-            <button onClick={handleUploadClick}>Upload</button>
+            <button onClick={handleUploadClick}>Subir Imagenes</button>
         </div>
     );
 }
