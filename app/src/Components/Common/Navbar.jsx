@@ -19,7 +19,9 @@ function MyNavbar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">AdoptaHn</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src="low_transparent.png" alt="" width={200} />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto" style={{ maxHeight: "250px" }} navbarScroll>
