@@ -1,0 +1,11 @@
+@media (max-width: 1024px) {
+  .large-form {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .small-form {
+    display: none;
+  }
+}

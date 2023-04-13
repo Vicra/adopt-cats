@@ -5,7 +5,6 @@ import Alert from "react-bootstrap/Alert";
 import useLocalStorageState from "use-local-storage-state";
 
 import React, { useState } from "react";
-import qs from "qs";
 import { useHistory } from "react-router-dom";
 
 import { login } from "../../../services/users";
@@ -90,10 +89,6 @@ function Login() {
             onChange={(e) => setField("password", e.target.value)}
             isInvalid={!!errors.password}
           />
-          <Form.Text className="text-muted">
-            Tu contraseña debe tener un caracter mayusculo, un número y un
-            caracter especial.
-          </Form.Text>
           <Form.Control.Feedback type="invalid">
             {errors.password}
           </Form.Control.Feedback>
