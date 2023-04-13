@@ -1,0 +1,12 @@
+$theme-colors: (
+  "primary": #a62a6c,
+  "success": #a62a6c,
+  "outline-secondary": lightgrey,
+);
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
+a {
+  color: #a62a6c;
+}
