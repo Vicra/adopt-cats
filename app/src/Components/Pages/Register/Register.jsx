@@ -11,7 +11,7 @@ const BREAK_POINT = 1025;
 function Register() {
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const width = windowSize.current[0];
-  console.log("width:", width);
+
   return (
     <>
       {width < BREAK_POINT && (
