@@ -8,6 +8,8 @@ const Footer = () => (
           <h5 className="text-uppercase">Rescate Animal Honduras</h5>
           <p>Ayudanos compartiendo la página web o las redes sociales.</p>
           <img src="low_white.png" alt="" width={400} />
+          <br />
+          <br />
         </div>
 
         <hr className="clearfix w-100 d-md-none pb-0" />

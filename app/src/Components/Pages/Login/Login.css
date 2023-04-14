@@ -1,0 +1,11 @@
+@media (max-width: 1024px) {
+  .optional {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .optional {
+    display: inline;
+  }
+}

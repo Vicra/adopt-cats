@@ -2,6 +2,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
+
 import useLocalStorageState from "use-local-storage-state";
 
 import React, { useState } from "react";
@@ -9,6 +11,9 @@ import { useHistory } from "react-router-dom";
 
 import { login } from "../../../services/users";
 import findFormErrors from "./formValidation";
+import { Row } from "react-bootstrap";
+
+import "./Login.css";
 
 function Login() {
   const [errors, setErrors] = useState({});
@@ -66,40 +71,56 @@ function Login() {
           Ha cerrado sesión exitosamente.
         </Alert>
       )}
-      <h1>Iniciar Sesión</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Correo Electrónico</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="correo@mail.com"
-            onChange={(e) => setField("email", e.target.value)}
-            isInvalid={!!errors.email}
-          />
-          <Form.Control.Feedback type="invalid">
-            {errors.email}
-          </Form.Control.Feedback>
-        </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Contraseña"
-            onChange={(e) => setField("password", e.target.value)}
-            isInvalid={!!errors.password}
-          />
-          <Form.Control.Feedback type="invalid">
-            {errors.password}
-          </Form.Control.Feedback>
-        </Form.Group>
+      <Container>
+        <Row xs={1} lg={2}>
+          <Col>
+            <h1>Iniciar Sesión</h1>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Correo Electrónico</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="correo@mail.com"
+                  onChange={(e) => setField("email", e.target.value)}
+                  isInvalid={!!errors.email}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
+              </Form.Group>
 
-        <div className="button-submit-container">
-          <Button variant="primary" type="submit" className="button-submit">
-            Iniciar
-          </Button>
-        </div>
-      </Form>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  onChange={(e) => setField("password", e.target.value)}
+                  isInvalid={!!errors.password}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <div className="button-submit-container">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="button-submit"
+                >
+                  Iniciar
+                </Button>
+              </div>
+            </Form>
+          </Col>
+          <Col className="optional">
+            <Container>
+              <img src="adopt.jpg" alt="" />
+            </Container>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 }

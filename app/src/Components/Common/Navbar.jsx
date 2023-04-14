@@ -20,7 +20,7 @@ function MyNavbar() {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">
-          <img src="low_transparent.png" alt="" width={200} />
+          <img src="low_transparent2.png" alt="" width={200} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
