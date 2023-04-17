@@ -27,6 +27,7 @@
         "react-scripts": "5.0.1",
         "react-simple-captcha": "^9.0.2",
         "sass": "^1.58.0",
+        "stream": "^0.0.2",
         "use-local-storage-state": "^18.1.2",
         "web-vitals": "^2.1.4"
     },
