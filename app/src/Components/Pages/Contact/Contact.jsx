@@ -115,7 +115,7 @@ const Contact = () => {
             </Form>
           </Col>
 
-          <Col>
+          <Col className="col d-flex justify-content-center">
             <ProfileCard />
           </Col>
         </Row>

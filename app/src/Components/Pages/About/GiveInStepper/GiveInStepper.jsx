@@ -1,13 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { CDBStepper, CDBStep } from "cdbreact";
 import Container from "react-bootstrap/Container";
-
-const BREAK_POINT = 1025;
-
 export const GiveInStepper = () => {
-  const windowSize = useRef([window.innerWidth, window.innerHeight]);
-  const width = windowSize.current[0];
-
   const [active, setActive] = useState(1);
 
   const handleNextPrevClick = (a) => {
