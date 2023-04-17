@@ -72,7 +72,7 @@ function Login() {
         </Alert>
       )}
 
-      <Container>
+      <Container className="mb-5">
         <Row xs={1} lg={2}>
           <Col>
             <h1>Iniciar Sesión</h1>
