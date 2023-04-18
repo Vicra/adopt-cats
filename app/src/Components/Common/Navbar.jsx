@@ -25,16 +25,9 @@ function MyNavbar() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto" style={{ maxHeight: "250px" }} navbarScroll>
-            <Nav.Link href="/give-in">Dar en Adopción</Nav.Link>
+            {isLoggedIn && <Nav.Link href="/give-in">Dar en Adopción</Nav.Link>}
             <Nav.Link href="/contact">Contacto</Nav.Link>
-            {!isLoggedIn && (
-              <NavDropdown title="Cuenta" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="/login">Inicia Sesión</NavDropdown.Item>
-                <NavDropdown.Item href="/register">
-                  Registrarse
-                </NavDropdown.Item>
-              </NavDropdown>
-            )}
+            <Nav.Link href="/about">Acerca de Nosotros</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
@@ -52,6 +45,16 @@ function MyNavbar() {
                   <Button onClick={logout} className="btn-danger">
                     Logout
                   </Button>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </>
+          )}
+          {!isLoggedIn && (
+            <>
+              <NavDropdown title="Cuenta" id="navbarScrollingDropdown">
+                <NavDropdown.Item href="/login">Inicia Sesión</NavDropdown.Item>
+                <NavDropdown.Item href="/register">
+                  Registrarse
                 </NavDropdown.Item>
               </NavDropdown>
             </>
