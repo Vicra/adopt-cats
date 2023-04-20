@@ -6,7 +6,7 @@ import { GiveInStepper } from "./GiveInStepper/GiveInStepper";
 const About = () => {
   return (
     <>
-      <Container className="mb-5">
+      <Container className="mb-5 mt-5">
         <Row xs={1} lg={2}>
           <Col>
             <h1>Como adoptar un animal</h1>
